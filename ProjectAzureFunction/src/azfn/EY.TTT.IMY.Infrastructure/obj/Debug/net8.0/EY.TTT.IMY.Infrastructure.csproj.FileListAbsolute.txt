@@ -1,0 +1,13 @@
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\bin\Debug\net8.0\EY.TTT.IMY.Infrastructure.deps.json
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\bin\Debug\net8.0\EY.TTT.IMY.Infrastructure.dll
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\bin\Debug\net8.0\EY.TTT.IMY.Infrastructure.pdb
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.csproj.AssemblyReference.cache
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.AssemblyInfoInputs.cache
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.AssemblyInfo.cs
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.csproj.CoreCompileInputs.cache
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.sourcelink.json
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.dll
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\refint\EY.TTT.IMY.Infrastructure.dll
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\EY.TTT.IMY.Infrastructure.pdb
+C:\IMY-AI\src\azfn\EY.TTT.IMY.Infrastructure\obj\Debug\net8.0\ref\EY.TTT.IMY.Infrastructure.dll
