@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "EY.TTT.IMY.AI.QueueTriggerFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7106",
+      "launchBrowser": false
+    }
+  }
+}
