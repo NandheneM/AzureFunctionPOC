@@ -1,0 +1,78 @@
+trigger:
+  branches:
+    include:
+      - master
+      - release/*
+  paths:
+    exclude:
+      - .azurepipelines/*
+
+name: $(pipeline.run.name).Branch.$(Build.SourceBranchName)-D.$(date:yyyy-MM-dd)-B.id.$(Build.BuildId)-R$(rev:.r)
+
+parameters:
+  - name: whitesourceScan
+    displayName: "Whitesource Scan"
+    type: boolean
+    default: false
+  - name: checkmarxScan
+    displayName: "Checkmarx Scan"
+    type: boolean
+    default: false
+  - name: unitTest
+    displayName: "Unit Tests"
+    type: boolean
+    default: false
+  - name: DeployAZF
+    displayName: "Deploy Azure Function"
+    type: boolean
+    default: true
+
+variables:
+  - template: variables/azfn/azfn.env.ci.yml
+
+pool:
+  vmImage: "ubuntu-latest"
+
+stages:
+  - stage: Build
+    displayName: "Build"
+    jobs:
+      - template: templates/azfn/azfn.build.yml
+        parameters:
+          whitesourceScan: ${{ parameters.whitesourceScan }}
+          checkmarxScan: ${{ parameters.checkmarxScan }}
+          unitTest: ${{ parameters.unitTest }}
+
+  #######################################
+  ###Development
+  #######################################
+  - stage: QA
+    displayName: "QA"
+    dependsOn: [Build]
+    #condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    variables:
+      - template: variables/env.qa.yml
+      - template: variables/azfn/azfn.env.cd.qa.yml
+    jobs:
+      - template: templates/azfn/azfn.deploy.yml
+        parameters:
+          azureServiceConnection: "SERVICE-CONNECTION-NAME"
+          targetEnvironment: "APPNAME-AZFN-QA"
+          DeployAZF: ${{ parameters.DeployAZF }}
+
+  #######################################
+  ###PROD
+  #######################################
+  - stage: PROD
+    displayName: "PROD"
+    dependsOn: [QA]
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
+    variables:
+      - template: variables/env.prod.yml
+      - template: variables/azfn/azfn.env.cd.prod.yml
+    jobs:
+      - template: templates/azfn/azfn.deploy.yml
+        parameters:
+          azureServiceConnection: ""
+          targetEnvironment: ""
+          DeployAZF: ${{ parameters.DeployAZF }}

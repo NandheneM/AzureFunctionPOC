@@ -1,0 +1,42 @@
+parameters:
+  - name: targetEnvironment
+    type: string
+  - name: azureServiceConnection
+    type: string
+  - name: DeployAZF
+    type: boolean
+
+jobs:
+  - deployment:
+    displayName: "Deployment"
+    dependsOn: []
+    environment: "${{ parameters.targetEnvironment }}"
+    pool:
+      vmImage: "windows-latest"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: AzureFunctionApp@1
+              condition: and(succeeded(), eq('${{ parameters.DeployAZF }}', true))
+              displayName: "Deploy Azure Function"
+              inputs:
+                azureSubscription: "${{ parameters.azureServiceConnection }}"
+                appType: "functionApp"
+                appName: "$(azf.name)"
+                package: "$(Agent.BuildDirectory)/appname_azfn_drop/AppName.AzureFunction.zip"
+                deploymentMethod: "auto"
+
+            - task: AzureAppServiceSettings@1
+              displayName: Azure App Service Settings
+              inputs:
+                azureSubscription: "${{ parameters.azureServiceConnection }}"
+                appName: $(azf.name)
+                appSettings: $(azf.appsettings)
+
+            - task: AzureAppServiceManage@0
+              displayName: "Restart App Service"
+              inputs:
+                azureSubscription: "${{ parameters.azureServiceConnection }}"
+                Action: "Restart Azure App Service"
+                WebAppName: "$(azf.name)"
